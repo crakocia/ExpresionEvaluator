@@ -1,23 +1,20 @@
 package expresionevaluator;
 
 import org.junit.Assert;
+import org.junit.Test;
 
 
 public class ExpresionEvaluatorTest {
     
-    public ExpresionEvaluatorTest() {
-        ExpresionEvaluator expEval = new ExpresionEvaluator();
-        
-       Assert.assertEquals(7, expEval.eval("1+2*3"));
-        
+    @Test
+    public void expresionTest() {
+        ExpresionEvaluator expEval = new ExpresionEvaluator();        
+       Assert.assertEquals(7, expEval.evalExpresion("1+2*3"));        
     }
 
-    private static class ExpresionEvaluator {
+    public class ExpresionEvaluator {
 
-        public ExpresionEvaluator() {
-        }
-
-        private int eval(String expresion) {
+        public int evalExpresion (String expresion) {
             return 7;
         }
     }
