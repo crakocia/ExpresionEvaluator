@@ -28,6 +28,8 @@ public class ExpresionEvaluatorTest {
     public void MultiplicationTest(){
         ExpresionEvaluator expEval = new ExpresionEvaluator();
         
-        Assert.assertEquals(4, expEval.evalExpresion("1+2*3"));        
+        Assert.assertEquals(7, expEval.evalExpresion("1+2*3")); 
+        Assert.assertEquals(9, expEval.evalExpresion("3*3")); 
+        Assert.assertEquals(25, expEval.evalExpresion("1+2+4*3+2*5"));        
     }
 }
