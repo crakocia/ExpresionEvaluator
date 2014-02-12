@@ -17,7 +17,6 @@ public class ExpresionEvaluator {
             }
             result += Integer.valueOf(resultM);
         }
-
         return result;
     }
 
