@@ -7,29 +7,16 @@ public class ExpresionEvaluatorTest {
 
     @Test
     public void simpleTest() {
-        ExpresionEvaluator expEval = new ExpresionEvaluator();
-        
-        Assert.assertEquals(1, expEval.evalExpresion("1"));
-        Assert.assertEquals(2, expEval.evalExpresion("2"));
-        Assert.assertEquals(3, expEval.evalExpresion("3"));
+        Assert.assertEquals(8, new Constant(8).calculate());
+        Assert.assertEquals(2, new Constant(2).calculate());
+        Assert.assertEquals(15.0, new Constant(15.0).calculate());        
     }
     
-    @Test
-    public void AdditionTest(){
-        ExpresionEvaluator expEval = new ExpresionEvaluator();
+    @Test 
+    public void additionTest(){
+        Assert.assertEquals(12, new AdditionOperation(new Constant(6).calculate(), new Constant(6).calculate()).calculate());
+        Assert.assertEquals(19, new AdditionOperation(new Constant(12).calculate(), new Constant(7).calculate()).calculate());
+        Assert.assertEquals(25.0, new AdditionOperation(new Constant(20.0).calculate(), new Constant(5.0).calculate()).calculate());
         
-        Assert.assertEquals(4, expEval.evalExpresion("2+2"));
-        Assert.assertEquals(5, expEval.evalExpresion("2+3"));
-        Assert.assertEquals(9, expEval.evalExpresion("2+3+4"));    
-        Assert.assertEquals(16, expEval.evalExpresion("4+4+8"));
-    }
-    
-    @Test
-    public void MultiplicationTest(){
-        ExpresionEvaluator expEval = new ExpresionEvaluator();
-        
-        Assert.assertEquals(7, expEval.evalExpresion("1+2*3")); 
-        Assert.assertEquals(9, expEval.evalExpresion("3*3")); 
-        Assert.assertEquals(25, expEval.evalExpresion("1+2+4*3+2*5"));        
-    }
+    } 
 }
