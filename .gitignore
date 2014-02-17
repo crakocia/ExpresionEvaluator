@@ -1,0 +1,6 @@
+*.properties
+*.netbeans_automatic_build
+.netbeans_
+*.netbeans_update_resources
+build/test/results/TEST-expresionevaluator.ExpresionEvaluatorTest.xml
+nbproject/private/private.xml
