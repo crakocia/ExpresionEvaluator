@@ -9,7 +9,7 @@ public class AdditionOperation extends BinaryOperation{
 
     @Override
     public Object calculate() {
-        Factory factoryOperation = new Factory();
+        OperationDictionary factoryOperation = new OperationDictionary();
         return factoryOperation.createAddition(left, right);
     }
 }
