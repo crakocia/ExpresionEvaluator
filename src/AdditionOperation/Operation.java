@@ -1,6 +1,6 @@
-package expresionevaluator;
+package AdditionOperation;
 
-interface Operation {
+public interface Operation {
 
     public Object execute(Object left, Object right);
     
