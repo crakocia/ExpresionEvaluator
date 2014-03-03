@@ -1,4 +1,4 @@
-package expresionevaluator;
+package parser;
 
 
 public class Token {
@@ -17,11 +17,11 @@ public class Token {
     };
     
     
-   public static class constant <Type> extends Token{
+   public static class number <Type> extends Token{
        
        private final Type constant;
 
-        public constant(Type constant) {
+        public number(Type constant) {
             this.constant = constant;
         }   
         

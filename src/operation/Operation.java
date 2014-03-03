@@ -1,4 +1,4 @@
-package AdditionOperation;
+package operation;
 
 public interface Operation {
 
