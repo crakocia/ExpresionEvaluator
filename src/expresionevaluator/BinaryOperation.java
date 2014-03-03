@@ -1,8 +1,7 @@
 package expresionevaluator;
 
 
-public abstract class BinaryOperation implements Expresion{
-    
+public abstract class BinaryOperation implements Expresion{   
     Object left;
     Object right;
 

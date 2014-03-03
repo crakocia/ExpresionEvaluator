@@ -4,3 +4,4 @@
 *.netbeans_update_resources
 build/test/results/TEST-expresionevaluator.ExpresionEvaluatorTest.xml
 nbproject/private/private.xml
+/dist/
