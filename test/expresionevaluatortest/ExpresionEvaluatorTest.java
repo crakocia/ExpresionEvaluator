@@ -8,8 +8,6 @@ import parser.Token.*;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.mockito.Mockito.*;
-
 
 public class ExpresionEvaluatorTest {
 
@@ -31,15 +29,23 @@ public class ExpresionEvaluatorTest {
     public void parserTest(){  
         ExpresionParser parser = new ExpresionParser();
         
-        Token[] tokens = {new number<>(3)};        
+        Token[] tokens = {new Value<>(3)};        
         
         Assert.assertEquals(3, (int) parser.evaluate(tokens));    
         
-         Token[] tokens2 = {new number<>(3),
-                          new symbol("+"),
-                          new number<>(4)};
+         Token[] tokens2 = {new Value<>(3),
+                          new Operator("+"),
+                          new Value<>(4)};
         
         Assert.assertEquals(7, (int) parser.evaluate(tokens2));
+        
+        Token[] tokens3 = {new Value<>(3),
+                          new Operator("+"),
+                          new Value<>(4),
+                          new Operator("+"),
+                          new Value<>(2)};       
+        
+          Assert.assertEquals(9, (int) parser.evaluate(tokens3));
         
     }
 }

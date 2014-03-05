@@ -3,32 +3,34 @@ package parser;
 
 public class Token {
     
-    public static class symbol extends Token {
+    public static class Operator extends Token {
         
-        private final String symbol;
+        private final String operator;
 
-        public symbol(String symbol) {
-            this.symbol = symbol;
+        public Operator(String symbol) {
+            this.operator = symbol;
         }       
         
         public String getValue(){
-            return symbol;
+            return operator;
         }
     };
     
     
-   public static class number <Type> extends Token{
+   public static class Value <Type> extends Token{
        
-       private final Type constant;
+       private Type value;
 
-        public number(Type constant) {
-            this.constant = constant;
+        public Value(Type constant) {
+            this.value = constant;
         }   
         
         public Type getValue(){
-            return constant;
+            return value;
+        }
+        
+        public void setValue(Type constant){
+            this.value = constant;
         }
    };
-   
-
 }

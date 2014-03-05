@@ -1,64 +1,47 @@
 package parser;
 
 import expresionevaluator.AdditionOperation;
-import parser.Token;
-import expresionevaluator.ExpresionFactory;
 import expresionevaluator.OperationFactory;
-import parser.Token.number;
-import parser.Token.symbol;
 import java.util.Stack;
+import parser.Token.*;
 
 public class ExpresionParser {
 
     private OperationFactory factory;
 
-    private Stack<symbol> symbols;
-    private Stack<number> numbers;
+    private Stack<Operator> symbols;
+    private Stack<Value> values;
 
     public ExpresionParser() {
         factory = new OperationFactory();
 
         symbols = new Stack<>();
-        numbers = new Stack<>();
+        values = new Stack<>();
     }
 
     public Object evaluate(Token[] tokens) {
         for (Object value : tokens) {
 
-            if (value instanceof symbol) {
-                symbols.push((symbol) value);
-            }
+            if (value instanceof Operator) 
+                symbols.push((Operator) value);            
 
-            if (value instanceof number) {
-                numbers.push((number) value);
-            }
+            if (value instanceof Value) 
+                values.push((Value) value);          
         }
 
-        number left = null;
-        number right = null;
-        symbol operator = null;
-
-        String operation = "";
+        Value value, value2;
+        Operator symbol;
+   
+        value = values.pop();
         
-        Object result = null;
+        while (symbols.size() >= 1){
+                symbol = symbols.pop();                
+                value2 = values.pop();
 
-        while (numbers.size() >= 1) {
-            left = numbers.pop();
-            
-            if (symbols.size() != 0) {
-                operator = symbols.pop();
-                right = numbers.pop();
-
-                if (operator.getValue().equals("+")){
-                    result = new AdditionOperation(left.getValue(), right.getValue()).calculate();
-                }            
-            }
-            
-            else return left.getValue();
-
+                value.setValue(new AdditionOperation(value.getValue(), value2.getValue()).calculate());
         }
-
-        return result;
+        
+        return value.getValue();
     }
 
 }
