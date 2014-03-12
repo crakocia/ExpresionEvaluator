@@ -5,3 +5,6 @@
 build/test/results/TEST-expresionevaluator.ExpresionEvaluatorTest.xml
 nbproject/private/private.xml
 /dist/
+.idea/
+build/
+*.iml

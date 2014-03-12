@@ -1,7 +1,10 @@
 package expresionevaluator;
 
 
-public class AdditionOperation extends BinaryOperation{
+import Expresion.BinaryExpresion;
+import operation.OperationFactory;
+
+public class AdditionOperation extends BinaryExpresion {
 
     public AdditionOperation(Object left, Object right) {
         super(left, right);
@@ -9,8 +12,8 @@ public class AdditionOperation extends BinaryOperation{
 
     @Override
     public Object calculate() {
-        OperationFactory operationDictionary = new OperationFactory();
-        return operationDictionary.builder("Addition", left, right);
+        OperationFactory operationfactory = new OperationFactory();
+        return operationfactory.builder("Addition", left, right);
     }
 }
 

@@ -1,8 +1,9 @@
 package expresionevaluatortest;
 
 import expresionevaluator.AdditionOperation;
-import expresionevaluator.Constant;
-import parser.ExpresionParser;
+import Expresion.Constant;
+import parser.Parser;
+import parser.ShuttingYardParser;
 import parser.Token;
 import parser.Token.*;
 import org.junit.Assert;
@@ -26,19 +27,21 @@ public class ExpresionEvaluatorTest {
     } 
     
     @Test
-    public void parserTest(){  
-        ExpresionParser parser = new ExpresionParser();
+    public void parserTest(){
+        Parser parser = new ShuttingYardParser();
         
-        Token[] tokens = {new Value<>(3)};        
-        
-        Assert.assertEquals(3, (int) parser.evaluate(tokens));    
+        Token[] tokens = {new Value<>(3)};
+
+        Assert.assertEquals(3,  (int) parser.evaluate(tokens));
         
          Token[] tokens2 = {new Value<>(3),
                           new Operator("+"),
                           new Value<>(4)};
         
         Assert.assertEquals(7, (int) parser.evaluate(tokens2));
-        
+
+
+
         Token[] tokens3 = {new Value<>(3),
                           new Operator("+"),
                           new Value<>(4),
@@ -46,6 +49,5 @@ public class ExpresionEvaluatorTest {
                           new Value<>(2)};       
         
           Assert.assertEquals(9, (int) parser.evaluate(tokens3));
-        
     }
 }

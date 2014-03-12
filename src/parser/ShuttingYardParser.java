@@ -1,29 +1,26 @@
 package parser;
 
 import expresionevaluator.AdditionOperation;
-import expresionevaluator.OperationFactory;
 import java.util.Stack;
 import parser.Token.*;
 
-public class ExpresionParser {
-
-    private OperationFactory factory;
-
-    private Stack<Operator> symbols;
+public class ShuttingYardParser implements Parser{
+    
+    private Stack<Operator> operators;
     private Stack<Value> values;
 
-    public ExpresionParser() {
-        factory = new OperationFactory();
+    public ShuttingYardParser() {
 
-        symbols = new Stack<>();
+        operators = new Stack<>();
         values = new Stack<>();
     }
 
+    @Override
     public Object evaluate(Token[] tokens) {
         for (Object value : tokens) {
 
             if (value instanceof Operator) 
-                symbols.push((Operator) value);            
+                operators.push((Operator) value);            
 
             if (value instanceof Value) 
                 values.push((Value) value);          
@@ -34,11 +31,12 @@ public class ExpresionParser {
    
         value = values.pop();
         
-        while (symbols.size() >= 1){
-                symbol = symbols.pop();                
+        while (operators.size() >= 1){
+                symbol = operators.pop();                
                 value2 = values.pop();
 
-                value.setValue(new AdditionOperation(value.getValue(), value2.getValue()).calculate());
+                if (symbol.getValue().equals("+"))
+                    value.setValue(new AdditionOperation(value.getValue(), value2.getValue()).calculate());
         }
         
         return value.getValue();

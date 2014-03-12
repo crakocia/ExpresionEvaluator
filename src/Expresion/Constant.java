@@ -1,7 +1,7 @@
-package expresionevaluator;
+package Expresion;
 
 
-public class Constant implements Expresion{
+public class Constant implements Expression {
     
     Object value;
     
