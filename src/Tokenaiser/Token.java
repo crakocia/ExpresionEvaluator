@@ -1,4 +1,4 @@
-package parser;
+package Tokenaiser;
 
 
 public class Token {
