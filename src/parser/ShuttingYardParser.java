@@ -1,45 +1,45 @@
 package parser;
 
-import expresionevaluator.AdditionOperation;
+import Tokenaiser.Token;
 import java.util.Stack;
-import parser.Token.*;
 
-public class ShuttingYardParser implements Parser{
-    
-    private Stack<Operator> operators;
-    private Stack<Value> values;
+import Tokenaiser.Token.*;
+import java.util.ArrayList;
+import java.util.List;
 
-    public ShuttingYardParser() {
-
-        operators = new Stack<>();
-        values = new Stack<>();
-    }
+public class ShuttingYardParser implements ParserStrategy {
 
     @Override
-    public Object evaluate(Token[] tokens) {
-        for (Object value : tokens) {
+    public List<Token> evaluate(List<Token> tokens) {
+        
+         Stack<Operator> operatorsStack = new Stack<>();
+         List<Token> outputList = new ArrayList<>();
 
-            if (value instanceof Operator) 
-                operators.push((Operator) value);            
+         Operator anterior = new Operator("");
+
+         for (Object value : tokens) {
+
+            if (value instanceof Operator) {                
+                if (anterior.equals("*")){
+                    Operator operator = (Operator)value;
+                    if (operator.equals("+") || operator.equals("-"))
+                        while(operatorsStack.size() != 0)
+                            outputList.add(operatorsStack.pop());                    
+                }
+               
+                operatorsStack.push((Operator) value);                
+                anterior = (Operator) value;
+            }
 
             if (value instanceof Value) 
-                values.push((Value) value);          
-        }
+                outputList.add((Value) value);
+            
+        }     
+         
+        while(operatorsStack.size() != 0)
+            outputList.add(operatorsStack.pop());      
 
-        Value value, value2;
-        Operator symbol;
-   
-        value = values.pop();
-        
-        while (operators.size() >= 1){
-                symbol = operators.pop();                
-                value2 = values.pop();
-
-                if (symbol.getValue().equals("+"))
-                    value.setValue(new AdditionOperation(value.getValue(), value2.getValue()).calculate());
-        }
-        
-        return value.getValue();
+        return outputList;
     }
 
 }

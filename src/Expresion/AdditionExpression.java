@@ -1,12 +1,12 @@
-package expresionevaluator;
+package Expresion;
 
 
 import Expresion.BinaryExpresion;
 import operation.OperationFactory;
 
-public class AdditionOperation extends BinaryExpresion {
+public class AdditionExpression extends BinaryExpresion {
 
-    public AdditionOperation(Object left, Object right) {
+    public AdditionExpression(Object left, Object right) {
         super(left, right);
     }
 

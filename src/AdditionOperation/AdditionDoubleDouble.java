@@ -1,5 +1,6 @@
-package operation;
+package AdditionOperation;
 
+import operation.Operation;
 import operation.Operation;
 
 public class AdditionDoubleDouble implements Operation {

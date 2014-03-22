@@ -1,8 +1,17 @@
 package parser;
 
-/**
- * Created by crako_000 on 12/03/14.
- */
-public interface Parser {
-    public Object evaluate(Token[] tokens);
+import Tokenaiser.Token;
+import java.util.List;
+
+public class Parser {
+
+    private ParserStrategy parserStrategy;
+
+    public Parser(ParserStrategy parserStrategy) {
+        this.parserStrategy = parserStrategy;
+    }
+
+    public List<Token> parse(List<Token> tokens) {
+        return parserStrategy.evaluate(tokens);
+    }
 }
