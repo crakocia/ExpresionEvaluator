@@ -7,6 +7,8 @@ import parser.ShuttingYardParser;
 import Tokenaiser.Token;
 import Tokenaiser.Token.*;
 import Tokenaiser.Tokenaiser;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -27,44 +29,79 @@ public class ExpresionEvaluatorTest {
     }
 
     @Test
-    public void parserTest() {
+    public void ParserSimpleExampleTest() {
         Parser parser = new Parser(new ShuttingYardParser());
 
-        Token[] tokens = {new Value(3)};
+        List<Token> tokens = new ArrayList<>();
+        List<Token> tokensOutput = new ArrayList<>();
+        
+        tokens.add(new Value(3));
+        
+        tokensOutput = parser.parse(tokens);
+        Value value = (Value) tokensOutput.get(0);
 
-        Assert.assertEquals(3, (int) parser.parse(tokens));
-
-        Token[] tokens2 = {new Value<>(3),
-            new Operator("+"),
-            new Value(4)};
-
-        Assert.assertEquals(7, (int) parser.parse(tokens2));
-
-        Token[] tokens3 = {new Value<>(3),
-            new Operator("+"),
-            new Value(4),
-            new Operator("+"),
-            new Value(2)};
-
-        Assert.assertEquals(9, (int) parser.parse(tokens3));
+        Assert.assertEquals("3", String.valueOf(value.getValue()));
     }
-
+    
     @Test
-    public void substractTest() {
+    public void parserTestAdditionOperation(){
         Parser parser = new Parser(new ShuttingYardParser());
+        
+        List<Token> tokens = new ArrayList<>();
+        List<Token> tokensOutput;
+        
+        tokens.add(new Value<>(3));
+        tokens.add(new Operator("+"));
+        tokens.add(new Value(4));        
+        
+        tokensOutput = parser.parse(tokens);
 
-        Token[] token = {new Value<>(3),
-            new Operator("-"),
-            new Value(4)};
+        Value value = (Value) tokensOutput.get(0);
+        Assert.assertEquals("3", String.valueOf(value.getValue()));
+        
+        value = (Value) tokensOutput.get(1);
+        Assert.assertEquals("4", String.valueOf(value.getValue()));
+        
+        Operator operator = (Operator) tokensOutput.get(2);
+        Assert.assertEquals("+", operator.getValue());
+    }
+    
+    @Test
+    public void parserTestOperation(){
+        Parser parser = new Parser(new ShuttingYardParser());
+        
+        List<Token> tokens = new ArrayList<>();
+        List<Token> tokensOutput;
+        
+        tokens.add(new Value<>(3));
+        tokens.add(new Operator("+"));
+        tokens.add(new Value(4));        
+        tokens.add(new Operator("*"));
+        tokens.add(new Value(2));        
+        tokens.add(new Operator("-"));
+        tokens.add(new Value(5));        
+        
+        tokensOutput = parser.parse(tokens);
 
-        Assert.assertEquals(1, (int) parser.parse(token));
-
-        Token[] tokens2 = {new Value(3),
-                            new Operator("+"),
-                            new Value(4),
-                            new Operator("-"),
-                            new Value(15)};
-
-        Assert.assertEquals(14, (int) parser.parse(tokens2));
+        Value value = (Value) tokensOutput.get(0);
+        Assert.assertEquals("3", String.valueOf(value.getValue()));
+        
+        value = (Value) tokensOutput.get(1);
+        Assert.assertEquals("4", String.valueOf(value.getValue()));
+        
+        value = (Value) tokensOutput.get(2);
+        Assert.assertEquals("2", String.valueOf(value.getValue()));
+        
+        Operator operator = (Operator) tokensOutput.get(3);
+        Assert.assertEquals("*", operator.getValue());
+        
+        operator = (Operator) tokensOutput.get(4);
+        Assert.assertEquals("+", operator.getValue());
+        
+        value = (Value) tokensOutput.get(5);
+        Assert.assertEquals("5", String.valueOf(value.getValue()));
+        
+        operator = (Operator) tokensOutput.get(6);
+        Assert.assertEquals("-", operator.getValue());
     }
 }

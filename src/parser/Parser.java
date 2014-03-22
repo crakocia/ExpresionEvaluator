@@ -1,6 +1,7 @@
 package parser;
 
 import Tokenaiser.Token;
+import java.util.List;
 
 public class Parser {
 
@@ -10,7 +11,7 @@ public class Parser {
         this.parserStrategy = parserStrategy;
     }
 
-    public Object parse(Token[] tokens) {
+    public List<Token> parse(List<Token> tokens) {
         return parserStrategy.evaluate(tokens);
     }
 }

@@ -1,7 +1,8 @@
 package parser;
 
 import Tokenaiser.Token;
+import java.util.List;
 
 public interface ParserStrategy {
-    public Object evaluate(Token[] tokens);
+    public List<Token> evaluate(List<Token> tokens);
 }

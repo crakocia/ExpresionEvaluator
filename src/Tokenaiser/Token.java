@@ -14,6 +14,10 @@ public class Token {
         public String getValue(){
             return operator;
         }
+        
+        public boolean equals(String operator){
+            return this.operator.equals(operator);
+        }
     };
     
     
