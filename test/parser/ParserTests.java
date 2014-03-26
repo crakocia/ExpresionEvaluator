@@ -1,6 +1,7 @@
 package parser;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import junit.framework.Assert;
 import org.junit.Test;
@@ -38,7 +39,7 @@ public class ParserTests {
         
         List<Token> tokens = new ArrayList<>();
         
-        tokens.add(new Token.Value<>(2));
+        tokens.add(new Token.Value(2));
         tokens.add(new Token.Operator("+"));
         tokens.add(new Token.Value(3));     
         
@@ -51,7 +52,7 @@ public class ParserTests {
         
         List<Token> tokens = new ArrayList<>();
         
-        tokens.add(new Token.Value<>(2));
+        tokens.add(new Token.Value(2));
         tokens.add(new Token.Operator("-"));
         tokens.add(new Token.Value(3));     
         
@@ -64,10 +65,73 @@ public class ParserTests {
         
         List<Token> tokens = new ArrayList<>();
         
-        tokens.add(new Token.Value<>(2));
+        tokens.add(new Token.Value(2));
         tokens.add(new Token.Operator("*"));
         tokens.add(new Token.Value(3));     
         
         Assert.assertEquals(6, (int) parser.parse(tokens));
+    }
+    
+    @Test
+    public void parseOperation(){
+        Parser parser = new Parser(new ShuttingYardParser());
+        
+        List<Token> tokens = new ArrayList<>();
+        
+        tokens.add(new Token.Value(2));
+        tokens.add(new Token.Operator("*"));
+        tokens.add(new Token.Value(3)); 
+        tokens.add(new Token.Operator("+"));
+        tokens.add(new Token.Value(2));    
+        
+        Assert.assertEquals(8, (int) parser.parse(tokens));
+        
+        tokens.clear();
+        
+        tokens.add(new Token.Value(2));
+        tokens.add(new Token.Operator("-"));
+        tokens.add(new Token.Value(1)); 
+        tokens.add(new Token.Operator("+"));
+        tokens.add(new Token.Value(5));    
+        
+        Assert.assertEquals(4, (int) parser.parse(tokens));
+        
+        Collections.reverse(tokens);
+        
+        Assert.assertEquals(6, (int) parser.parse(tokens));
+        
+        tokens.clear();
+        
+        tokens.add(new Token.Value(2));
+        tokens.add(new Token.Operator("-"));
+        tokens.add(new Token.Value(1)); 
+        tokens.add(new Token.Operator("*"));
+        tokens.add(new Token.Value(5));    
+        
+        Assert.assertEquals(3, (int) parser.parse(tokens)); 
+        
+        Collections.reverse(tokens);
+        
+        Assert.assertEquals(-3, (int) parser.parse(tokens));
+        
+        tokens.clear();
+        
+        tokens.add(new Token.Value<>(2));
+        tokens.add(new Token.Operator("-"));
+        tokens.add(new Token.Value(6)); 
+        tokens.add(new Token.Operator("*"));
+        tokens.add(new Token.Value(5));
+        tokens.add(new Token.Operator("+"));
+        tokens.add(new Token.Value<>(2));
+        tokens.add(new Token.Operator("-"));         
+        tokens.add(new Token.Value<>(2));
+        tokens.add(new Token.Operator("*"));
+        tokens.add(new Token.Value(5));
+        
+        Assert.assertEquals(36, (int) parser.parse(tokens)); 
+        
+        Collections.reverse(tokens);
+        
+        Assert.assertEquals(-20, (int) parser.parse(tokens));
     }
 }
