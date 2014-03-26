@@ -1,9 +1,6 @@
 package SubstractionOperation;
 
-import AdditionOperation.*;
 import operation.Operation;
-import operation.Operation;
-
 
 public class SubstractionIntegerDouble implements Operation{
 
