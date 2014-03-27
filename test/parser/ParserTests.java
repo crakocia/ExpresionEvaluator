@@ -149,30 +149,6 @@ public class ParserTests {
         tokens.add(new Token.Operator("*"));
         tokens.add(new Token.Value(3));
 
-        Assert.assertEquals(15, (int) parser.parse(tokens));
-
-        tokens.clear();
-
-        tokens.add(new Token.Operator("("));
-        tokens.add(new Token.Operator("("));
-        tokens.add(new Token.Value(2));
-        tokens.add(new Token.Operator("-"));
-        tokens.add(new Token.Value(6));        
-        tokens.add(new Token.Operator(")"));
-        tokens.add(new Token.Operator("*"));
-        tokens.add(new Token.Value(5));
-        tokens.add(new Token.Operator("+"));
-        tokens.add(new Token.Value(2));
-        tokens.add(new Token.Operator(")"));
-        tokens.add(new Token.Operator("-"));
-        tokens.add(new Token.Value(2));
-        tokens.add(new Token.Operator("*"));
-        tokens.add(new Token.Value(5));        
-      
-        Assert.assertEquals(36, (int) parser.parse(tokens));
-        
-        Collections.reverse(tokens);
-
-        Assert.assertEquals(36, (int) parser.parse(tokens));
+        Assert.assertEquals(15, (int) parser.parse(tokens));      
     }
 }
